@@ -43,51 +43,67 @@
         <button class="startButton">Start</button>
     </div>
 
-    <div class="footer">This is the content</div>
+    <div class="footer">
+        <button class="backButton">Back</button>
+    </div>
 
     <!-- Add your script files -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const startButton = document.querySelector('.startButton');
             const links = document.querySelector('.links');
-            
+
             const header = document.querySelector('.header');
             const content = document.querySelector('.content');
 
-            button.addEventListener('mouseover', function () {
+            const backButton = document.querySelector('.backButton');
+
+            startButton.addEventListener('mouseover', function () {
                 gsap.to(links, {
                     scale: 2,
                     duration: 3,
                     ease: "power1.out",
-
-
                 });
                 startButton.addEventListener('click', function () {
-                    gsap.to(links, {
-                        opacity: 0,
-                        duration: 2,
-                        display: 'none'
+                    const timeline = gsap.timeline({ defaults: 2 })
+                    timeline
+                        .to(links, { opacity: 0, duration: 2, display: 'none' })
+                        .to(header, { opacity: 0, display: 'none' }, "<")
+                        .to(startButton, { opacity: 0, display: 'none' }, "<")
+                        .to(content, { opacity: 0, display: 'none'}, "<")
+                            //  {
+                            //     gsap.to(links, {
+                            //         opacity: 0,
+                            //         duration: 2,
+                            //         display: 'none'
+                            //     })
+                            //     gsap.to(header, {
+                            //         opacity: 0,
+                            //         duration: 2,
+                            //         display: 'none'
+                            //     })
+                            //     gsap.to(startButton, {
+                            //         opacity: 0,
+                            //         duration: 2,
+                            //         display: 'none'
+
+                            //     })
+                            //     gsap.to(content, {
+                            //         opacity: 0,
+                            //         duration: 2,
+                            //         display: 'none'
+
+                            //     })
+                        })
+                    backButton.addEventListener('click', function () {
+                        gsap.to(links, {
+                            opacity: 1,
+                            duration: 2,
+                            display: inline
+                        })
                     })
-                    gsap.to(header, {
-                        opacity: 0,
-                        duration: 2,
-                        display: 'none'
-                    })
-                    gsap.to(startButton, {
-                        opacity: 0,
-                        duration: 2,
-                        display: 'none'
-                        
                 })
-                gsap.to(content, {
-                        opacity: 0,
-                        duration: 2,
-                        display: 'none'
-                        
-                })
-            })
-               })
-        });
+            });
 
 
     </script>

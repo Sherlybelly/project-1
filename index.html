@@ -10,6 +10,7 @@
     <style>
         body {
             margin: 0;
+            
 
         }
 
@@ -18,12 +19,16 @@
             padding-top: 100px;
             padding-bottom: 30px;
             background-color: aquamarine;
-            display: flex;
-            justify-content: center;
+           
+            
 
         }
 
-
+.links 
+{
+    display: flex;
+    justify-content: center;
+}
         .content {
             background-color: aquamarine;
             display: flex;
@@ -32,6 +37,14 @@
 
         .backButton {
             display: none;
+            position:fixed;
+            top: 200px;
+            left: 20px;
+            z-index: 1;
+        }
+
+        footer{
+            position: absolute;
         }
     </style>
 
@@ -65,7 +78,7 @@
             // startButton.addEventListener('mouseover', function () {
             gsap.to(links, {
                 scale: 2,
-                duration: 3,
+                duration: 1,
                 ease: "power1.out",
             });
             startButton.addEventListener('click', function () {
@@ -75,7 +88,7 @@
                     .to(header, { opacity: 0, display: 'none' }, "<")
                     .to(startButton, { opacity: 0, display: 'none' }, "<")
                     .to(content, { opacity: 0, display: 'none' }, "<")
-                    .to(backButton, { opacity: 1, ease: "power1.out", duration: 5, display: 'inline' })
+                    .to(backButton, { opacity: 1, duration: 1, display: 'inline' })
                 //  {
                 //     gsap.to(links, {
                 //         opacity: 0,
@@ -99,34 +112,23 @@
                 //         display: 'none'
 
                 //     })
+
+              
             })
             backButton.addEventListener('click', function () {
-                    gsap.to(links, {
-                        opacity: 1,
-                        duration: 2,
-                        display: 'flex'
-                    })
-                    gsap.to(header, {
-                        opacity: 1,
-                        duration: 2,
-                        display: 'flex'
-                    })
-                    gsap.to(startButton, {
-                        opacity: 1,
-                        duration: 2,
-                        display: 'flex'
+                const timeline = gsap.timeline({ defaults: 1 })
+                timeline
+                    .to(links, {opacity: 1, display: 'flex', scale: 2,})
+                    .to(header, { opacity: 1, display: 'flex'}, "<")
+                    .to(startButton, {opacity: 1, display: 'flex'}, "<")
+                    .to(content, {opacity: 1, display: 'flex'}, "<")
+                    .to(backButton, {opacity: 0, display: 'none'},"<")
+                    
+                            })
+                
+             })        
 
-                    })
-                    gsap.to(content, {
-                        opacity: 1,
-                        duration: 2,
-                        display: 'flex'
-
-                })
-            })
-
-
-        });
+  
 
 
     </script>

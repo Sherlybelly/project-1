@@ -10,7 +10,7 @@
     <style>
         body {
             margin: 0;
-            
+
 
         }
 
@@ -19,15 +19,22 @@
             padding-top: 100px;
             padding-bottom: 30px;
             background-color: aquamarine;
-           
-            
+
+
 
         }
 
-.links 
-{
-    display: flex;
-    justify-content: center;
+        .welcome {
+            display: flex;
+            justify-content: center;
+        }
+
+        header img {
+            width: 100%;
+        }
+.menucat {
+    width: 10px;
+    height: 100px;
 }
         .content {
             background-color: aquamarine;
@@ -37,13 +44,13 @@
 
         .backButton {
             display: none;
-            position:fixed;
+            position: fixed;
             top: 200px;
             left: 20px;
             z-index: 1;
         }
 
-        footer{
+        footer {
             position: absolute;
         }
     </style>
@@ -52,7 +59,8 @@
 
 <body>
     <div class="header">
-        <div class="links">Welcome to Art of Artists</div>
+        <div class="welcome">Welcome to Art of Artists</div>
+        <div class="menucat"><img src="IMAGES/mainmenucat.jpg"></div>
 
     </div>
 
@@ -68,7 +76,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const startButton = document.querySelector('.startButton');
-            const links = document.querySelector('.links');
+            const welcome = document.querySelector('.welcome');
 
             const header = document.querySelector('.header');
             const content = document.querySelector('.content');
@@ -76,19 +84,19 @@
             const backButton = document.querySelector('.backButton');
 
             // startButton.addEventListener('mouseover', function () {
-            gsap.to(links, {
+            gsap.to(welcome, {
                 scale: 2,
                 duration: 1,
                 ease: "power1.out",
             });
             startButton.addEventListener('click', function () {
-                const timeline = gsap.timeline({ defaults: 1 })
+                const timeline = gsap.timeline({ defaults: { duration: 1 }  })
                 timeline
-                    .to(links, { opacity: 0, display: 'none' })
+                    .to(welcome, { opacity: 0, display: 'none' })
                     .to(header, { opacity: 0, display: 'none' }, "<")
                     .to(startButton, { opacity: 0, display: 'none' }, "<")
                     .to(content, { opacity: 0, display: 'none' }, "<")
-                    .to(backButton, { opacity: 1, duration: 1, display: 'inline' })
+                    .to(backButton, { opacity: 1, duration: 1, display: 'inline-block' })
                 //  {
                 //     gsap.to(links, {
                 //         opacity: 0,
@@ -113,22 +121,24 @@
 
                 //     })
 
-              
+
             })
             backButton.addEventListener('click', function () {
-                const timeline = gsap.timeline({ defaults: 1 })
+                const timeline = gsap.timeline({ defaults: { duration: 1 } })
                 timeline
-                    .to(links, {opacity: 1, display: 'flex', scale: 2,})
-                    .to(header, { opacity: 1, display: 'flex'}, "<")
-                    .to(startButton, {opacity: 1, display: 'flex'}, "<")
-                    .to(content, {opacity: 1, display: 'flex'}, "<")
-                    .to(backButton, {opacity: 0, display: 'none'},"<")
-                    
-                            })
-                
-             })        
+                    .fromTo(welcome, { opacity: 0, display: 'flex', scale: 1 },
+                        { opacity: 1, display: 'flex', scale: 2, ease: "power1.out" })
 
-  
+                    .to(header, { opacity: 1, display: 'block' }, "<")
+                    .to(startButton, { opacity: 1, display: 'flex' }, "<")
+                    .to(content, { opacity: 1, display: 'flex' }, "<")
+                    .to(backButton, { opacity: 0, display: 'none' }, "<")
+
+            })
+
+        })
+
+
 
 
     </script>

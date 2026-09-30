@@ -10,7 +10,7 @@
     <style>
         body {
             margin: 0;
-
+overflow: hidden;
 
         }
 
@@ -25,39 +25,52 @@
             text-align: center;
             background-color: aquamarine;
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100vh;
         }
 
         .welcome {
 
-
+flex-wrap: wrap;
             padding-bottom: 20px;
             pointer-events: none;
+            position: relative;
         }
 
         .content {
-          border-width: 10px black;
-           background-image: url(IMAGES/background.png);
+            background-image: url(IMAGES/background.png);
             background-repeat: no-repeat;
             background-position: center;
-background-size: contain;
-text-align: center;
-        width: 100%;
-        height: 100vh;
-    
-            
+            background-size: contain;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+     
+           
+
+
         }
-        .content img{
-            display: block;
-            height: 100%;
-            width: auto;
+
+
+        .backButton {
+            position: relative;
         }
-      .backButton{
-        position: relative;
-      }
 
         footer {
             position: absolute;
+        }
+
+        @media screen and (max-width: 640px) {
+            .header, .content {
+background-size: cover;
+             width: 100%;
+                height: 100vh;
+            }
+            
+
+        
         }
     </style>
 

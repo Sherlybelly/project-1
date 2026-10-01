@@ -41,6 +41,8 @@
         }
 
         .startButton {
+            font-size: 3vw;
+            border-radius: 20px;
             margin: 30px auto;
             padding: 10px;
             pointer-events: auto;
@@ -51,8 +53,8 @@
 
 
         .content {
-            /* display: none; */
-            /* opacity: 0; */
+            display: none;
+            opacity: 0;
             position: fixed;
             top: 0;
             left: 0;
@@ -122,30 +124,24 @@
 
         }
 
-        #fish {
-            display: none;
-            position: absolute;
-            cursor: pointer;
-            pointer-events: auto;
-            margin: auto;
-            inset: 0;
-
-
-
-
-        }
 
         @media (max-width: 680px) {
 
             #fish,
-            #catstare {
+            #catstare,
+            #flower {
                 width: 100vw;
                 height: 100vh;
                 object-fit: contain;
             }
+
+      
         }
 
-        #catstare {
+        #catstare,
+        #fish,
+        #flower,
+        #sun {
             display: none;
             position: absolute;
             cursor: pointer;
@@ -213,7 +209,7 @@
 
 
         .outdoorsButton {
-            opacity: 0.5;
+            opacity: 1;
             border-radius: 25px;
             z-index: 10;
             position: absolute;
@@ -222,13 +218,16 @@
             transform: translate(-50%, -50%);
             top: 32%;
             left: 22%;
-            padding-bottom: 23vw;
-            padding-left: 17vw;
+            
+
             font-size: 2vw;
         }
 
-        .backButton {
 
+
+        .backButton {
+border-radius: 25px;
+font-size: 3vw;
             z-index: 10;
             position: absolute;
             transform: translate(-50%, -50%);
@@ -236,7 +235,7 @@
             left: 10%;
             cursor: pointer;
             pointer-events: auto;
-            
+
 
         }
 
@@ -247,10 +246,13 @@
             top: 70%;
             left: 50%;
             background-color: rgba(255, 255, 255, 0.8);
-            z-index: 10;
+            z-index: 20;
             padding: 20px;
             border-radius: 10px;
-            font-size: 1.5rem;
+            font-size: 2.5rem;
+                  
+            
+
         }
 
         footer {
@@ -301,14 +303,18 @@
             <button class="meowButton">Hello!!</button>
             <button class="fishButton">fish</button>
             <button class="outdoorsButton">Outside</button>
+
             <button class="backButton">Back</button>
         </div>
 
         <div class="dialouge">Hello!</div>
-        <div class="disapear">
-            <img id="fish" src="IMAGES/fish (2).jpg">
-            <img id="catstare" src="IMAGES/catstare.jpeg">
-        </div>
+
+        <img id="fish" src="IMAGES/fish (2).jpg">
+        <img id="catstare" src="IMAGES/catstare.jpeg">
+        <img id="flower" src="IMAGES/flower.png">
+
+
+
     </div>
 
     <div class="footer">
@@ -343,10 +349,14 @@
             const fishbowl = document.getElementById('fishbowl')
             const fish = document.getElementById('fish')
             const catstare = document.getElementById('catstare')
-            let isFishScene = false;
+
+
 
             const outdoorsButton = document.querySelector('.outdoorsButton')
-            
+            const flower = document.getElementById('flower')
+            const sun = document.getElementById('sun')
+            let isFlowerScene = false;
+
 
             const dialouge = document.querySelector('.dialouge');
 
@@ -382,6 +392,18 @@
                         "<")
 
                     .to(content, { opacity: 0, display: 'none' }, "<");
+
+                   
+            });
+
+             backButton.addEventListener('mouseover', function () {
+                
+                     dialouge.style.display = "flex";
+                dialouge.innerText = "Don't leave me! I want to play with you!"
+            });
+
+             backButton.addEventListener('mouseout', function () {
+                dialouge.style.display = "none";
             });
 
             openLight.addEventListener('click', function () {
@@ -411,7 +433,7 @@
 
             });
 
-          
+
 
 
             meowButton.addEventListener('mouseover', function () {
@@ -466,12 +488,11 @@
                         { opacity: 1, scale: 1.1, y: -10 },
                         { opacity: 1, scale: 1, y: 0, ease: "power1.out" }
                     );
-                if (isFishScene) return; 
-                dialouge.style.display = "none";
+
             });
 
             fishButton.addEventListener('click', function () {
-                isFishScene = true;
+
                 fishclick.play()
                 const timeline = gsap.timeline({ defaults: { duration: 1 } });
                 timeline
@@ -514,25 +535,54 @@
             });
 
 
-                outdoorsButton.addEventListener('mouseover', function () {
+            outdoorsButton.addEventListener('mouseover', function () {
 
                 dialouge.style.display = "flex";
-                dialouge.innerText = "I want to see purrfect flora! Let's go outside!"
+                dialouge.innerText = "I want to see some birds! Let's go outside!"
             })
 
             outdoorsButton.addEventListener('mouseout', function () {
-                dialouge.style.display = "none";
+                if (!isFlowerScene) {
+                    dialouge.style.display = "none";
+                }
 
             })
 
-             outdoorsButton.addEventListener('click', function () {
+            outdoorsButton.addEventListener('click', function () {
+                isFlowerScene = true;
+                const timeline = gsap.timeline({ defaults: { duration: 1 } });
+                timeline
+                    .fromTo(flower,
+                        { opacity: 0, scale: 1 },
+                        { opacity: 1, display: 'flex', scale: 1, y: -100, ease: "power1.out" }, "<")
 
+                    .fromTo(canvas,
+                        { opacity: 1 },
+                        { opacity: 0, display: 'none', ease: "power1.out" }, "<");
                 dialouge.style.display = "flex";
-                dialouge.innerText = "no!"
+                dialouge.innerText = "I love flowers! Let's smell them together!"
+                catclick.play()
+
             })
+            flower.addEventListener('click', function () {
+                isFlowerScene = false;
+                dialouge.style.display = "none";
+                const timeline = gsap.timeline({ defaults: { duration: 1 } });
+                timeline
+                    .to(flower,
+                        { opacity: 0, display: 'none', ease: "power1.out" }, "<")
+                    .fromTo(canvas,
+                        { opacity: 0 },
+                        { opacity: 1, display: 'flex', ease: "power1.out" }, "<")
+
+
+
+
+            });
+
 
         });
-        
+
 
 
 

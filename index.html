@@ -61,7 +61,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color:#eae1ff;
+            background-color: #eae1ff;
             pointer-events: none;
             display: flex;
             justify-content: center;
@@ -224,6 +224,8 @@
 
 
         .backButton {
+            display: none;
+            opacity: 0;
             border-radius: 25px;
             font-size: 3vw;
             z-index: 10;
@@ -301,13 +303,15 @@
         <source src="SOUND/fish.mp3" type="audio/mpeg">
     </audio>
 
-    <p>Relaxing Music For Cats</p>
-    <audio controls id="backgroundMusic" autoplay muted loop>
+    <audio id="backgroundMusic">
         <source src="SOUND/background.mp3" type="audio/mpeg">
     </audio>
 
     <div class="content">
+
+        
         <div class="canvas">
+
             <img id=background src="IMAGES/background.png">
             <img id="frames" src="IMAGES/frames.png">
             <img id="bed" src="IMAGES/bed.png">
@@ -379,11 +383,14 @@
             const outdoorsButton = document.querySelector('.outdoorsButton')
             const flower = document.getElementById('flower')
             const sun = document.getElementById('sun')
-            let isFlowerScene = false;
-
-
 
             const dialouge = document.querySelector('.dialouge');
+
+            const backgroundMusic = document.getElementById('backgroundMusic')
+            backgroundMusic.volume = 0.01
+            fishbowlclick.volume= 0.02
+            fishclick.volume = 0.03
+            catclick.volume = 0.05
 
 
 
@@ -401,26 +408,17 @@
                     .to(openLight, { opacity: 0, duration: 1, display: 'flex', }, "<")
                     .to(fishButton, { opacity: 0, duration: 1, display: 'flex', }, "<")
                     .to(meowButton, { opacity: 0, duration: 1, display: 'flex', }, "<")
+                    .to(backButton, { opacity: 1, duration: 1, display: 'flex', }, "<")
+
+                backgroundMusic.play()
+
+
+
+
 
             })
             backButton.addEventListener('click', function () {
-                const timeline = gsap.timeline({ defaults: { duration: 2 } });
-                timeline
-                    .fromTo(header,
-                        { opacity: 0, display: 'block' },
-                        { opacity: 1, display: 'block', ease: "power1.out" }
-                    )
-                    .fromTo(welcome,
-                        { scale: 1 },
-                        { scale: 2, ease: "power1.out" },
-                        "<")
-                    .fromTo(startButton,
-                        { opacity: 0 },
-                        { opacity: 1 },
-                        "<")
-
-                    .to(content, { opacity: 0, display: 'none' }, "<");
-
+                location.reload();
 
             });
 
@@ -511,10 +509,10 @@
 
                 const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
                 timeline
-                
+
 
                     .fromTo(fishbowl,
-                        { opacity: 1, scale: 1.1},
+                        { opacity: 1, scale: 1.1 },
                         { opacity: 1, scale: 1, y: 0, ease: "power1.out" }
                     );
 
@@ -533,7 +531,8 @@
                         { opacity: 0, display: 'none', ease: "power1.out" }, "<");
                 dialouge.style.display = "flex";
                 dialouge.innerText = "blub... can you help me find something? blub.. blub.."
-                return;
+                content.style.backgroundColor = "#30c4a0";
+
 
             });
 
@@ -543,11 +542,12 @@
                 timeline
                     .fromTo(catstare,
                         { opacity: 0, scale: 1 },
-                        { opacity: 1, display: 'flex', y: -200, ease: "power1.out" }, "<")
+                        { opacity: 1, display: 'flex', y: -100, ease: "power1.out" }, "<")
                     .fromTo(fish,
                         { opacity: 1 },
                         { opacity: 0, display: 'none', ease: "power1.out" }, "<")
                 dialouge.style.display = "flex";
+                content.style.backgroundColor = "#9daf89";
                 dialouge.innerText = "Meow! You look tasty! Meow I want to eat you! Meow!"
             });
 
@@ -561,13 +561,13 @@
                     .fromTo(fish,
                         { opacity: 0 },
                         { opacity: 1, display: 'flex', ease: "power1.out" }, "<")
-
+                content.style.backgroundColor = "#30c4a0";
                 dialouge.style.display = "flex";
                 dialouge.innerText = "blub... stop joking around with me! blub.. blub.."
 
                 fish.addEventListener('click', function () {
                     catclick.play()
-                    const timeline = gsap.timeline({ defaults: { duration: 1 } });
+                    const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
                     timeline
                         .fromTo(catstare,
                             { opacity: 0 },
@@ -575,7 +575,7 @@
                         .fromTo(fish,
                             { opacity: 1 },
                             { opacity: 0, display: 'none', ease: "power1.out" }, "<")
-
+                    content.style.backgroundColor = "#9daf89";
                     dialouge.style.display = "flex";
                     dialouge.innerText = "Mweowhahaah >:D! I will eat you now! Meow!"
 
@@ -592,7 +592,7 @@
 
                         dialouge.style.display = "flex";
                         dialouge.innerText = "Ahhhhh!!! *hides*"
-
+                        content.style.backgroundColor = "#30c4a0";
                         fish.addEventListener('click', function () {
                             catclick.play()
                             const timeline = gsap.timeline({ defaults: { duration: 1 } });
@@ -613,26 +613,21 @@
                                     { opacity: 0 },
                                     { opacity: 1, display: 'flex', ease: "power1.out" }, "<")
 
-
+                            content.style.backgroundColor = "#eae1ff";
 
                             dialouge.style.display = "flex";
                             dialouge.innerText = "oh my meow! My fishy friend ran away"
                             outdoorsButton.addEventListener('mouseover', function () {
-                               
+
                                 dialouge.style.display = "flex";
                                 dialouge.innerText = "Maybe there's something outside!"
                             })
 
-                            outdoorsButton.addEventListener('mouseout', function () {
-                                if (!isFlowerScene) {
-                                    dialouge.style.display = "none";
-                                }
 
-                            })
 
 
                             outdoorsButton.addEventListener('click', function () {
-                                isFlowerScene = true;
+
                                 const timeline = gsap.timeline({ defaults: { duration: 1 } });
                                 timeline
                                     .fromTo(flower,
@@ -643,11 +638,11 @@
                                         { opacity: 1 },
                                         { opacity: 0, display: 'none', ease: "power1.out" }, "<");
 
-                                        
+
                                 dialouge.style.display = "flex";
                                 dialouge.innerText = " Flowers! Let's smell them together!"
-                                catclick.play()
                                 
+
 
                             })
 
@@ -668,44 +663,42 @@
                                     .fromTo(fishButton,
                                         { opacity: 0 },
                                         { opacity: 0, display: 'flex', ease: "power1.out" })
-                                        
+
                                 dialouge.style.display = "flex";
                                 dialouge.innerText = " My fishy friend wants something! I need to find it right meow to apologize!"
-                            
 
-                            fishButton.addEventListener('mouseout', function () 
-                        { 
-                              const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
-                                timeline
-                                .fromTo(fishbowl,
-                                        { opacity: 1, },
-                                        { opacity: 1, y: 0, ease: "power1.out" }, "<")
-                                    .fromTo(fishButton,
-                                        { opacity: 0 },
-                                        { opacity: 0, display: 'flex', ease: "power1.out" })
-                
-                             })
 
-                              fishButton.addEventListener('click', function () 
-                        { 
-                              const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
-                                timeline
-                                .fromTo(fishbowl,
-                                        { opacity: 1, },
-                                        { opacity: 1, y: 0, ease: "power1.out" }, "<")
-                                    .fromTo(fishButton,
-                                        { opacity: 0 },
-                                        { opacity: 0, display: 'flex', ease: "power1.out" })
+                                fishButton.addEventListener('mouseout', function () {
+                                    const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
+                                    timeline
+                                        .fromTo(fishbowl,
+                                            { opacity: 1, },
+                                            { opacity: 1, y: 0, ease: "power1.out" }, "<")
+                                        .fromTo(fishButton,
+                                            { opacity: 0 },
+                                            { opacity: 0, display: 'flex', ease: "power1.out" })
+
+                                })
+
+                                fishButton.addEventListener('click', function () {
+                                    const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
+                                    timeline
+                                        .fromTo(fishbowl,
+                                            { opacity: 1, },
+                                            { opacity: 1, y: 0, ease: "power1.out" }, "<")
+                                        .fromTo(fishButton,
+                                            { opacity: 0 },
+                                            { opacity: 0, display: 'flex', ease: "power1.out" })
                                     dialouge.style.display = "flex";
-                                dialouge.innerText = " Go away!"
-                                        
-                              
-                             })
+                                    dialouge.innerText = " Go away!"
 
-                                
-                                        
-                              
-})
+
+                                })
+
+
+
+
+                            })
 
 
 
@@ -723,6 +716,7 @@
                                         { opacity: 1, display: 'flex', ease: "power1.out" }, "<")
                                 dialouge.style.display = "flex";
                                 dialouge.innerText = "Thank you for helping me find my flowers! I love them! Blub!"
+                                content.style.backgroundColor = "#30c4a0";
                                 fish.addEventListener('click', function () {
                                     catclick.play()
                                     const timeline = gsap.timeline({ defaults: { duration: 1 } });
@@ -733,51 +727,52 @@
                                         .fromTo(fish,
                                             { opacity: 1 },
                                             { opacity: 0, display: 'none', ease: "power1.out" }, "<")
-                                           
+
                                     dialouge.style.display = "flex";
                                     dialouge.innerText = "Omg my fishy friend loves flowers! Thank you for helping me find them! Meow!"
-                                      fishButton.addEventListener('mouseover', function () {
+                                    fishButton.addEventListener('mouseover', function () {
 
 
-                                const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
-                                timeline
+                                        const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
+                                        timeline
 
-                                    .fromTo(fishbowl,
-                                        { opacity: 1, scale: 1},
-                                        { opacity: 1, display: 'flex',scale: 1}, "<")
-                                    .fromTo(fishButton,
-                                        { opacity: 0, display: 'flex'},
-                                        { opacity: 0, display: 'flex', ease: "power1.out" })
-                                        
-                                dialouge.style.display = "flex";
-                                dialouge.innerText = " Say hi to fishy friend again!"
+                                            .fromTo(fishbowl,
+                                                { opacity: 1, scale: 1 },
+                                                { opacity: 1, display: 'flex', scale: 1 }, "<")
+                                            .fromTo(fishButton,
+                                                { opacity: 0, display: 'flex' },
+                                                { opacity: 0, display: 'flex', ease: "power1.out" })
 
-                                 
-
-                                fishButton.addEventListener('click', function () {
+                                        dialouge.style.display = "flex";
+                                        dialouge.innerText = " Say hi to fishy friend again!"
 
 
-                                const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
-                                timeline
 
-                                    .fromTo(fishbowl,
-                                        { opacity: 1, scale: 1},
-                                        { opacity: 1, display: 'flex',scale: 1}, "<")
-                                    .fromTo(fishButton,
-                                        { opacity: 0 },
-                                        { opacity: 0, display: 'none', ease: "power1.out" })
-                                        
-                                        
-                                dialouge.style.display = "flex";
-                                dialouge.innerText = " *bubbles in happiness*"
-
-                                    
-
-                                   
-});});
+                                        fishButton.addEventListener('click', function () {
 
 
-                                   
+                                            const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
+                                            timeline
+
+                                                .fromTo(fishbowl,
+                                                    { opacity: 1, scale: 1 },
+                                                    { opacity: 1, display: 'flex', scale: 1 }, "<")
+                                                .fromTo(fishButton,
+                                                    { opacity: 0 },
+                                                    { opacity: 0, display: 'none', ease: "power1.out" })
+
+
+                                            dialouge.style.display = "flex";
+                                            dialouge.innerText = " *bubbles in happiness*"
+
+
+
+
+                                        });
+                                    });
+
+
+
 
 
                                     catstare.addEventListener('click', function () {
@@ -821,7 +816,7 @@
 
                                         });
 
-                                        
+
 
 
 

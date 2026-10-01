@@ -94,8 +94,9 @@
         #light,
         #food,
         #drawer,
-        #fish,
+        #fishbowl,
         #glow {
+
             position: absolute;
             top: 0;
             left: 0;
@@ -115,11 +116,38 @@
             transform: translate(-50%, -50%);
             top: 80%;
             left: 15%;
-
             max-width: 40%;
             max-height: 100%;
             pointer-events: none;
 
+        }
+
+        #fish {
+            display: none;
+            position: absolute;
+            cursor: pointer;
+            pointer-events: auto;
+            transform: translate(-50%, -50%);
+            top: 10%;
+            left: 50%;
+            max-width: 100%;
+            max-height: 100%;
+
+
+        }
+
+        #catstare {
+            display: none;
+            position: absolute;
+            cursor: pointer;
+            pointer-events: auto;
+            transform: translate(-50%, -50%);
+            top: 90%;
+            left: 50%;
+            max-width: 100%;
+            max-height: 100%;
+          justify-content: center;
+          align-items: center;
 
 
         }
@@ -132,7 +160,6 @@
         .openLight {
             opacity: 0;
             border-radius: 25px;
-
             z-index: 10;
             position: absolute;
             cursor: pointer;
@@ -143,6 +170,21 @@
             padding-bottom: 5vw;
             font-size: 2vw;
 
+        }
+
+        .fishButton {
+            opacity: 0;
+            border-radius: 25px;
+            z-index: 10;
+            position: absolute;
+            cursor: pointer;
+            pointer-events: auto;
+            transform: translate(-50%, -50%);
+            top: 32%;
+            left: 45%;
+            padding-bottom: 5vw;
+            padding-left: 4vw;
+            font-size: 2vw;
         }
 
         .meowButton {
@@ -174,6 +216,13 @@
 
         }
 
+        .dialouge {
+             position: absolute;
+            transform: translate(-50%, -50%);
+            top: 10%;
+            left: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
         footer {
             position: absolute;
         }
@@ -194,6 +243,14 @@
     <audio id="catclick">
         <source src="SOUND/meow.mp3" type="audio/mpeg">
     </audio>
+
+    <audio id="fishbowlclick">
+        <source src="SOUND/glass.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="fishclick">
+        <source src="SOUND/fish.mp3" type="audio/mpeg">
+    </audio>
     <div class="content">
         <div class="canvas">
             <img id=background src="IMAGES/background.png">
@@ -206,14 +263,19 @@
             <img id="rug" src="IMAGES/rug.png">
             <img id="food" src="IMAGES/food.png">
             <img id="drawer" src="IMAGES/drawer.png">
-            <img id="fish" src="IMAGES/fish.png">
+            <img id="fishbowl" src="IMAGES/fish.png">
             <img id="glow" src="IMAGES/glow.png">
             <img id="vanillacat" src="IMAGES/vanillacat.png">
+
+
             <button class="meowButton">Hello!!</button>
+            <button class="fishButton">fish</button>
             <button class="backButton">Back</button>
         </div>
 
-
+      <div class="dialouge">Hello!</div>
+            <img id="fish" src="IMAGES/fish (2).jpg">
+           <img id="catstare" src="IMAGES/catstare.jpeg">
 
     </div>
 
@@ -229,6 +291,7 @@
             const welcome = document.querySelector('.welcome');
             const content = document.querySelector('.content');
             const backButton = document.querySelector('.backButton');
+            const canvas = document.querySelector('.canvas');
 
             const openLight = document.querySelector('.openLight')
             const glow = document.getElementById('glow')
@@ -238,6 +301,13 @@
             const meowButton = document.querySelector('.meowButton')
             const catclick = document.getElementById('catclick')
             const vanillacat = document.getElementById('vanillacat')
+
+            const fishButton = document.querySelector('.fishButton')
+            const fishbowlclick = document.getElementById('fishbowlclick')
+            const fishclick = document.getElementById('fishclick')
+            const fishbowl = document.getElementById('fishbowl')
+            const fish = document.getElementById('fish')
+            const catstare = document.getElementById('catstare')
 
 
             // startButton.addEventListener('mouseover', function () {
@@ -309,6 +379,70 @@
                         { opacity: 1, scale: 1, ease: "power1.out" }
                     );
             });
+
+
+
+
+            catstare.addEventListener('click', function () {
+                const timeline = gsap.timeline({ defaults: { duration: 1 } });
+                timeline
+                    .fromTo(catstare,
+                        { opacity: 1, scale: 1 },
+                        { opacity: 0, display: 'none', y: -800, ease: "power1.out" })
+                    .fromTo(canvas,
+                        { opacity: 0 },
+                        { opacity: 1, display: 'flex', ease: "power1.out" }, "<")
+
+            });
+            fishButton.addEventListener('mouseover', function () {
+                fishbowlclick.play()
+                const timeline = gsap.timeline({ defaults: { duration: 1 } });
+                timeline
+
+                    .fromTo(fishbowl,
+                        { opacity: 1, scale: 1 },
+                        { opacity: 1, scale: 1.1, y: -10, ease: "power1.out" }
+                    );
+            });
+
+            fishButton.addEventListener('mouseout', function () {
+
+                const timeline = gsap.timeline({ defaults: { duration: 1 } });
+                timeline
+
+                    .fromTo(fishbowl,
+                        { opacity: 1, scale: 1.1, y: -10 },
+                        { opacity: 1, scale: 1, y: 0, ease: "power1.out" }
+                    );
+            });
+            
+            fishButton.addEventListener('click', function () {
+                fishclick.play()
+                const timeline = gsap.timeline({ defaults: { duration: 2 } });
+                timeline
+                    .fromTo(fish,
+                        { opacity: 0, scale: 1 },
+                        { opacity: 1, display: 'flex', scale: 1, y: 100, ease: "power1.out" },)
+                    .fromTo(canvas,
+                        { opacity: 1 },
+                        { opacity: 0, display: 'none', ease: "power1.out" }, "<");
+
+
+            });
+
+            fish.addEventListener('click', function () {
+                meowButton.click()
+                const timeline = gsap.timeline({ defaults: { duration: 1 } });
+                timeline
+                    .fromTo(catstare,
+                        { opacity: 0, scale: 1 },
+                        { opacity: 1, display: 'flex', y: -700, ease: "power1.out" })
+                    .fromTo(fish,
+                        { opacity: 1 },
+                        { opacity: 0, display: 'none', ease: "power1.out" }, "<")
+
+            });
+
         });
 
 

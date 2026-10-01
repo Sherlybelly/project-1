@@ -7,7 +7,7 @@ https://sherlybelly.github.io/project-1/
 
 ## Project Overview
 
-The purpose of my project is create a cozy low-stress game contolling the actions of a cat.
+The purpose of my project is create a cozy low-stress game controlling the actions of a cat. You start this game by clicking the fishbowl, then outdoors button, then explore the room!
 
 ## Features
 

@@ -278,6 +278,14 @@
 
         }
 
+        button:hover {
+            box-shadow: 5px 10px 5px 0px #a18f8d;
+        }
+
+        button:active {
+            opacity: 0.8;
+        }
+
         footer {
             position: absolute;
         }
@@ -453,8 +461,26 @@
             });
 
             dialouge.addEventListener('click', function () {
-dialouge.style.display = "none"
+                dialouge.style.display = "none"
             });
+
+            startButton.addEventListener('mouseover', function () {
+                const timeline = gsap.timeline({ defaults: { duration: 1 } })
+                timeline
+                      .fromTo(startButton,
+                        {  },
+                        { ease: "power1.out", scale:1.2}
+                    )
+            })
+
+            startButton.addEventListener('mouseout', function () {
+                const timeline = gsap.timeline({ defaults: { duration: 1 } })
+                timeline
+                      .fromTo(startButton,
+                        { scale:1.2 },
+                        { ease: "power1.out", scale:1}
+                    )
+            })
             startButton.addEventListener('click', function () {
                 const timeline = gsap.timeline({ defaults: { duration: 1 } })
                 timeline
@@ -570,7 +596,7 @@ dialouge.style.display = "none"
                         { opacity: 1, scale: 1.1 },
                         { opacity: 1, scale: 1, y: 0, ease: "power1.out" }
                     );
-dialouge.style.display = "none";
+                dialouge.style.display = "none";
             });
 
             fishButton.addEventListener('click', function () {
@@ -582,7 +608,7 @@ dialouge.style.display = "none";
                     .fromTo(fish,
                         { opacity: 0, scale: 1 },
                         { opacity: 1, display: 'flex', scale: 1, y: -100, ease: "power1.out" }, "<")
-                         .fromTo(dialouge,
+                    .fromTo(dialouge,
                         { opacity: 0, scale: 1 },
                         { opacity: 1, display: 'flex' }, "<")
                     .fromTo(canvas,
@@ -590,7 +616,7 @@ dialouge.style.display = "none";
                         { opacity: 0, display: 'none', ease: "power1.out" }, "<");
 
                 content.style.backgroundColor = "#30c4a0";
-                
+
 
 
             });
@@ -643,7 +669,7 @@ dialouge.style.display = "none";
                         const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
                         timeline
                             .fromTo(catstare,
-                                { opacity: 0},
+                                { opacity: 0 },
                                 { opacity: 0, display: 'none', ease: "power1.out" }, "<")
                             .fromTo(fish,
                                 { opacity: 0 },
@@ -671,7 +697,7 @@ dialouge.style.display = "none";
                                 .fromTo(canvas,
                                     { opacity: 0 },
                                     { opacity: 1, display: 'flex', ease: "power1.out" }, "<")
-                             
+
 
                             content.style.backgroundColor = "#eae1ff";
 
@@ -741,7 +767,7 @@ dialouge.style.display = "none";
                                 })
 
                                 fishButton.addEventListener('click', function () {
-                                  
+
                                     const timeline = gsap.timeline({ defaults: { duration: 1 } });
                                     timeline
                                         .fromTo(fishbowl,
@@ -750,12 +776,12 @@ dialouge.style.display = "none";
                                         .fromTo(fishButton,
                                             { opacity: 0 },
                                             { opacity: 0, display: 'flex', ease: "power1.out" })
-                                           
 
-                 
 
-                                      
-                                            
+
+
+
+
 
                                     dialouge.style.display = "flex";
                                     dialouge.innerText = " Go away!"
@@ -773,7 +799,7 @@ dialouge.style.display = "none";
 
                             flower.addEventListener('click', function () {
                                 fishclick.play()
-                              
+
                                 const timeline = gsap.timeline({ defaults: { duration: 1 } });
                                 timeline
                                     .fromTo(flower,

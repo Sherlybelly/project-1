@@ -7,9 +7,9 @@
     <title>Project 1</title>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
     <!-- Add your stylesheets here -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -23,7 +23,7 @@
             background-repeat: no-repeat;
             background-position: center;
             background-attachment: fixed;
-           
+
 
             padding-top: 100px;
 
@@ -45,7 +45,7 @@
         }
 
         .startButton {
-            font-size: 3vw;
+
             border-radius: 20px;
             margin: 30px auto;
             padding: 10px;
@@ -222,7 +222,8 @@
             left: 22%;
 
 
-            font-size: 2vw;
+
+
         }
 
 
@@ -231,7 +232,7 @@
             display: none;
             opacity: 0;
             border-radius: 25px;
-            font-size: 3vw;
+            font-size: 1rem;
             z-index: 10;
             position: absolute;
             transform: translate(-50%, -50%);
@@ -246,6 +247,7 @@
         .dialouge {
             display: none;
             position: absolute;
+
             transform: translate(-50%, -50%);
             top: 70%;
             left: 50%;
@@ -253,13 +255,24 @@
             z-index: 20;
             justify-content: center;
             text-align: center;
-           padding: 10px;
-             margin: 0 auto;
+            padding: 10px;
+            margin: 0 auto;
             border-radius: 10px;
             font-size: 2.5rem;
-             font-family: "Hi Melody", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+
+
+
+
+        }
+
+        .dialouge,
+        .backButton,
+        .outdoorsButton,
+        .startButton {
+            font-family: "Hi Melody", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 3rem;
 
 
 
@@ -280,33 +293,39 @@
             }
 
             .dialouge {
-           font-size: 2rem;
+                font-size: 2em;
                 top: auto;
-                
-          
-          
-          
-         
+
+
+
+
+
             }
 
-            .header{
-                
-                  background-size: contain;
+            .header {
+
+                background-size: contain;
             }
+
+            .backButton,
+            .outdoorsButton {
+
+                font-size: 1rem;
+            }
+
+
 
 
         }
 
-         @media (max-width: 435px) {
-            .dialouge{
-          
-            
-font-size: 1rem;
+        @media (max-width: 435px) {
+            .dialouge {
 
-}
-         }
 
-        
+                font-size: 1em;
+
+            }
+        }
     </style>
 
 </head>
@@ -340,7 +359,7 @@ font-size: 1rem;
 
     <div class="content">
 
-        
+
         <div class="canvas">
 
             <img id=background src="IMAGES/background.png">
@@ -363,7 +382,7 @@ font-size: 1rem;
 
 
 
-            <button class="backButton">Back</button>
+            <button class="backButton">BACK</button>
         </div>
         <div class="scene">
             <div class="dialouge">Hello!</div>
@@ -419,10 +438,10 @@ font-size: 1rem;
 
             const backgroundMusic = document.getElementById('backgroundMusic')
             backgroundMusic.volume = 0.01
-            fishbowlclick.volume= 0.01
+            fishbowlclick.volume = 0.01
             fishclick.volume = 0.01
             catclick.volume = 0.05
-            lightclick.volume =0.02
+            lightclick.volume = 0.02
 
 
 
@@ -431,6 +450,10 @@ font-size: 1rem;
                 scale: 2,
                 duration: 1,
                 ease: "power1.out",
+            });
+
+            dialouge.addEventListener('click', function () {
+dialouge.style.display = "none"
             });
             startButton.addEventListener('click', function () {
                 const timeline = gsap.timeline({ defaults: { duration: 1 } })
@@ -547,23 +570,27 @@ font-size: 1rem;
                         { opacity: 1, scale: 1.1 },
                         { opacity: 1, scale: 1, y: 0, ease: "power1.out" }
                     );
-
+dialouge.style.display = "none";
             });
 
             fishButton.addEventListener('click', function () {
-
+                dialouge.style.display = "flex";
+                dialouge.innerText = "blub... can you help me find something? blub.. blub.."
                 fishclick.play()
                 const timeline = gsap.timeline({ defaults: { duration: 1 } });
                 timeline
                     .fromTo(fish,
                         { opacity: 0, scale: 1 },
                         { opacity: 1, display: 'flex', scale: 1, y: -100, ease: "power1.out" }, "<")
+                         .fromTo(dialouge,
+                        { opacity: 0, scale: 1 },
+                        { opacity: 1, display: 'flex' }, "<")
                     .fromTo(canvas,
                         { opacity: 1 },
                         { opacity: 0, display: 'none', ease: "power1.out" }, "<");
-                dialouge.style.display = "flex";
-                dialouge.innerText = "blub... can you help me find something? blub.. blub.."
+
                 content.style.backgroundColor = "#30c4a0";
+                
 
 
             });
@@ -602,7 +629,7 @@ font-size: 1rem;
                     const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
                     timeline
                         .fromTo(catstare,
-                            { opacity: 0 },
+                            { opacity: 1 },
                             { opacity: 1, display: 'flex', ease: "power1.in" }, "<")
                         .fromTo(fish,
                             { opacity: 1 },
@@ -616,7 +643,7 @@ font-size: 1rem;
                         const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
                         timeline
                             .fromTo(catstare,
-                                { opacity: 1 },
+                                { opacity: 0},
                                 { opacity: 0, display: 'none', ease: "power1.out" }, "<")
                             .fromTo(fish,
                                 { opacity: 0 },
@@ -639,11 +666,12 @@ font-size: 1rem;
                                     { opacity: 1 },
                                     { opacity: 0, display: 'none', ease: "power1.out" }, "<")
                                 .fromTo(catstare,
-                                    { opacity: 1 },
+                                    { opacity: 0 },
                                     { opacity: 0, display: 'none', ease: "power1.out" }, "<")
                                 .fromTo(canvas,
                                     { opacity: 0 },
                                     { opacity: 1, display: 'flex', ease: "power1.out" }, "<")
+                             
 
                             content.style.backgroundColor = "#eae1ff";
 
@@ -673,7 +701,7 @@ font-size: 1rem;
 
                                 dialouge.style.display = "flex";
                                 dialouge.innerText = " Flowers! Let's smell them together!"
-                                
+
 
 
                             })
@@ -713,7 +741,8 @@ font-size: 1rem;
                                 })
 
                                 fishButton.addEventListener('click', function () {
-                                    const timeline = gsap.timeline({ defaults: { duration: 0.1 } });
+                                  
+                                    const timeline = gsap.timeline({ defaults: { duration: 1 } });
                                     timeline
                                         .fromTo(fishbowl,
                                             { opacity: 1, },
@@ -721,6 +750,13 @@ font-size: 1rem;
                                         .fromTo(fishButton,
                                             { opacity: 0 },
                                             { opacity: 0, display: 'flex', ease: "power1.out" })
+                                           
+
+                 
+
+                                      
+                                            
+
                                     dialouge.style.display = "flex";
                                     dialouge.innerText = " Go away!"
 
@@ -737,7 +773,7 @@ font-size: 1rem;
 
                             flower.addEventListener('click', function () {
                                 fishclick.play()
-                                dialouge.style.display = "none";
+                              
                                 const timeline = gsap.timeline({ defaults: { duration: 1 } });
                                 timeline
                                     .fromTo(flower,

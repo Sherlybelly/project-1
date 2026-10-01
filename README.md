@@ -25,11 +25,11 @@ The purpose of my project is create a cozy low-stress game contolling the action
     - **Other**: GitHub Pages for hosting, Pinterest for inspiration and photos, Youtube for tutorials, and procreate for design
 
 ## Credits
-https://www.youtube.com/watch?v=m6PDUIF24v4&t=818s Learn GSAP In 23 Minutes
-https://remtopx.com/blog/css-units-accessibility-guide/ CSS Units and Web Accessibility: A Comprehensive Guide
-https://youtu.be/FLicWRghfpQ?si=zeYXbvUZyZ7bdbyv VH and VW units explained
-https://gsap.com/docs/v3/Eases/ Easing GSAP
-https://gsap.com/cheatsheet/ GSAP cheatsheet
+- https://www.youtube.com/watch?v=m6PDUIF24v4&t=818s Learn GSAP In 23 Minutes
+- https://remtopx.com/blog/css-units-accessibility-guide/ CSS Units and Web Accessibility: A Comprehensive Guide
+- https://youtu.be/FLicWRghfpQ?si=zeYXbvUZyZ7bdbyv VH and VW units explained
+- https://gsap.com/docs/v3/Eases/ Easing GSAP
+- https://gsap.com/cheatsheet/ GSAP cheatsheet
 
 Class examples: JavaScript, emoji, sound, etc
 

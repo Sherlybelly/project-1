@@ -14,6 +14,7 @@
 
         }
 
+
         .header {
             background-image: url(IMAGES/mainmenucat.jpg);
             background-repeat: no-repeat;
@@ -267,7 +268,7 @@
 </head>
 
 <body>
-    
+
     <div class="header">
         <div class="welcome">A Day In The Life Of A Cat</div>
 
@@ -289,7 +290,7 @@
         <source src="SOUND/fish.mp3" type="audio/mpeg">
     </audio>
 
-<p>Relaxing Music For Cats</p>
+    <p>Relaxing Music For Cats</p>
     <audio controls id="backgroundMusic" autoplay muted loop>
         <source src="SOUND/background.mp3" type="audio/mpeg">
     </audio>
@@ -368,7 +369,7 @@
             const flower = document.getElementById('flower')
             const sun = document.getElementById('sun')
             let isFlowerScene = false;
-            
+
 
 
             const dialouge = document.querySelector('.dialouge');
@@ -716,16 +717,17 @@
                                                     .fromTo(fish,
                                                         { opacity: 0 },
                                                         { opacity: 1, display: 'flex', ease: "power1.out" }, "<")
-                                                    
+
                                                 dialouge.style.display = "flex";
                                                 dialouge.innerText = "Thank you for helping me find my flowers! I love them! Blub!"
-                                                
+
+                                            });
+
+
+
+
+
                                         });
-
-
-
-
-
                                     });
                                 });
                             });
@@ -733,7 +735,7 @@
                     });
                 });
             });
-        });});
+        });
 
 
 
